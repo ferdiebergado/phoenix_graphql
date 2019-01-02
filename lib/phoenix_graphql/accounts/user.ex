@@ -10,7 +10,7 @@ defmodule PhoenixGraphql.Accounts.User do
     field :is_active, :boolean, default: false
     field :role, :integer, default: 1
     field :last_login, :utc_datetime
-    has_one(:credential, Credential)
+    has_one(:credentials, Credential)
 
     timestamps()
   end

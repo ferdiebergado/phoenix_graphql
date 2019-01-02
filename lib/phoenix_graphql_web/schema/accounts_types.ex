@@ -10,11 +10,11 @@ defmodule PhoenixGraphqlWeb.Schema.AccountsTypes do
     field :role, :integer
     field :is_active, :boolean
     field :last_login, :naive_datetime
-    field :credential, list_of(:credential)
+    field :credentials, list_of(:credentials)
   end
 
-  @desc "User credential/s"
-  object :credential do
+  @desc "User credentials"
+  object :credentials do
     field :email, :string
   end
 end
