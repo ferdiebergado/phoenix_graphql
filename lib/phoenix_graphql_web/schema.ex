@@ -11,11 +11,21 @@ defmodule PhoenixGraphqlWeb.Schema do
       resolve(&Resolvers.UserResolver.list_users/3)
     end
 
-    # Add this field:
     @desc "Find a user by ID"
     field :user, :user do
       arg(:id, non_null(:id))
       resolve(&Resolvers.UserResolver.find_user/3)
+    end
+  end
+
+  mutation do
+    @desc "Create a user"
+    field :create_user, :user do
+      arg(:firstname, non_null(:string))
+      arg(:lastname, non_null(:string))
+      arg(:username, non_null(:string))
+      arg(:credentials, :accounts_input)
+      resolve(&Resolvers.UserResolver.create_user/3)
     end
   end
 end

@@ -17,4 +17,9 @@ defmodule PhoenixGraphqlWeb.Schema.AccountsTypes do
   object :credentials do
     field :email, :string
   end
+
+  input_object :accounts_input do
+    field :email, non_null(:string)
+    field :password, non_null(:string)
+  end
 end
