@@ -16,3 +16,6 @@ config :phoenix_graphql, PhoenixGraphql.Repo,
   database: "phoenix_graphql_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
+
+# Password Hashing
+config :argon2_elixir, t_cost: 2, m_cost: 8

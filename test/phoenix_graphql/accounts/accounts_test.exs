@@ -6,8 +6,16 @@ defmodule PhoenixGraphql.AccountsTest do
   describe "users" do
     alias PhoenixGraphql.Accounts.User
 
-    @valid_attrs %{firstname: "some firstname", lastname: "some lastname", username: "some username"}
-    @update_attrs %{firstname: "some updated firstname", lastname: "some updated lastname", username: "some updated username"}
+    @valid_attrs %{
+      firstname: "some firstname",
+      lastname: "some lastname",
+      username: "some username"
+    }
+    @update_attrs %{
+      firstname: "some updated firstname",
+      lastname: "some updated lastname",
+      username: "some updated username"
+    }
     @invalid_attrs %{firstname: nil, lastname: nil, username: nil}
 
     def user_fixture(attrs \\ %{}) do
@@ -69,9 +77,9 @@ defmodule PhoenixGraphql.AccountsTest do
   describe "credentials" do
     alias PhoenixGraphql.Accounts.Credential
 
-    @valid_attrs %{email: "some email"}
-    @update_attrs %{email: "some updated email"}
-    @invalid_attrs %{email: nil}
+    @valid_attrs %{email: "test@example.com", password: "some password", user_id: 1}
+    @update_attrs %{email: "email@domain.com", password: "new password", user_id: 1}
+    @invalid_attrs %{email: nil, password: nil, user_id: nil}
 
     def credential_fixture(attrs \\ %{}) do
       {:ok, credential} =
@@ -103,7 +111,10 @@ defmodule PhoenixGraphql.AccountsTest do
 
     test "update_credential/2 with valid data updates the credential" do
       credential = credential_fixture()
-      assert {:ok, %Credential{} = credential} = Accounts.update_credential(credential, @update_attrs)
+
+      assert {:ok, %Credential{} = credential} =
+               Accounts.update_credential(credential, @update_attrs)
+
       assert credential.email == "some updated email"
     end
 
