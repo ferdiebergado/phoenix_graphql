@@ -44,7 +44,8 @@ defmodule PhoenixGraphql.MixProject do
       {:comeonin, "~> 4.1"},
       {:argon2_elixir, "~> 1.3"},
       {:absinthe, "~> 1.4"},
-      {:absinthe_plug, "~> 1.4"}
+      {:absinthe_plug, "~> 1.4"},
+      {:scribe, "~> 0.8.1"}
     ]
   end
 

@@ -54,3 +54,8 @@ config :phoenix_graphql, PhoenixGraphql.Repo,
   database: "phoenix_graphql_dev",
   hostname: "localhost",
   pool_size: 10
+
+  # Use Scribe automatically
+    config :scribe,
+    compile_auto_inspect: true,
+    auto_inspect: true
