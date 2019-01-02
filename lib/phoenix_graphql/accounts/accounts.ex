@@ -18,8 +18,9 @@ defmodule PhoenixGraphql.Accounts do
 
   """
   def list_users do
-    Repo.all(User)
-    Repo.preload(nil, :credential)
+    User
+    |> Repo.all()
+    |> Repo.preload(:credential)
   end
 
   @doc """
@@ -37,8 +38,9 @@ defmodule PhoenixGraphql.Accounts do
 
   """
   def get_user!(id) do
-    Repo.get!(User, id)
-    Repo.preload(nil, :credential)
+    User
+    |> Repo.get!(id)
+    |> Repo.preload(:credential)
   end
 
   @doc """
