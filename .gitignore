@@ -36,4 +36,4 @@ phoenix_graphql-*.tar
 /config/*.secret.exs
 
 # ElixirLS 
-/.elixir-ls
+/.elixir_ls
