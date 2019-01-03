@@ -16,25 +16,25 @@ defmodule PhoenixGraphqlWeb.Schema.AccountsTypes do
   @desc "User credentials"
   object :credentials do
     field :email, :string
-    field :FACEBOOK_APP_ID, :string
-    field :GITHUB_CLIENT_ID, :string
-    field :GOOGLE_CLIENT_ID, :string
-    field :SLACK_CLIENT_ID, :string
-    field :TWITTER_CONSUMER_KEY, :string
+    field :facebook_app_id, :string
+    field :github_client_id, :string
+    field :google_client_id, :string
+    field :slack_client_id, :string
+    field :twitter_consumer_key, :string
   end
 
   input_object :accounts_input do
     field :email, non_null(:string)
     field :password, non_null(:string)
-    field :FACEBOOK_APP_ID, :string
-    field :FACEBOOK_APP_SECRET, :string
-    field :GITHUB_CLIENT_ID, :string
-    field :GITHUB_CLIENT_SECRET, :string
-    field :GOOGLE_CLIENT_ID, :string
-    field :GOOGLE_CLIENT_SECRET, :string
-    field :SLACK_CLIENT_ID, :string
-    field :SLACK_CLIENT_SECRET, :string
-    field :TWITTER_CONSUMER_KEY, :string
-    field :TWITTER_CONSUMER_SECRET, :string
+    field :facebook_app_id, :string
+    field :facebook_app_secret, :string
+    field :github_client_id, :string
+    field :github_client_secret, :string
+    field :google_client_id, :string
+    field :google_client_secret, :string
+    field :slack_client_id, :string
+    field :slack_client_secret, :string
+    field :twitter_consumer_key, :string
+    field :twitter_consumer_secret, :string
   end
 end

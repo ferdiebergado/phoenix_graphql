@@ -7,16 +7,16 @@ defmodule PhoenixGraphql.Accounts.Credential do
     field :email, :string
     field :password, :string, virtual: true
     field :password_hash, :string
-    field :FACEBOOK_APP_ID, :string
-    field :FACEBOOK_APP_SECRET, :string
-    field :GITHUB_CLIENT_ID, :string
-    field :GITHUB_CLIENT_SECRET, :string
-    field :GOOGLE_CLIENT_ID, :string
-    field :GOOGLE_CLIENT_SECRET, :string
-    field :SLACK_CLIENT_ID, :string
-    field :SLACK_CLIENT_SECRET, :string
-    field :TWITTER_CONSUMER_KEY, :string
-    field :TWITTER_CONSUMER_SECRET, :string
+    field :facebook_app_id, :string
+    field :facebook_app_secret, :string
+    field :github_client_id, :string
+    field :github_client_secret, :string
+    field :google_client_id, :string
+    field :google_client_secret, :string
+    field :slack_client_id, :string
+    field :slack_client_secret, :string
+    field :twitter_consumer_key, :string
+    field :twitter_consumer_secret, :string
     belongs_to(:user, User)
 
     timestamps()
@@ -25,22 +25,21 @@ defmodule PhoenixGraphql.Accounts.Credential do
   @doc false
   def changeset(credential, attrs) do
     credential
-    |> cast(attrs, [:email, :password, :password_hash, :user_id])
     |> cast(attrs, [
       :email,
       :password,
       :password_hash,
       :user_id,
-      :FACEBOOK_APP_ID,
-      :FACEBOOK_APP_SECRET,
-      :GITHUB_CLIENT_ID,
-      :GITHUB_CLIENT_SECRET,
-      :GOOGLE_CLIENT_ID,
-      :GOOGLE_CLIENT_SECRET,
-      :SLACK_CLIENT_ID,
-      :SLACK_CLIENT_SECRET,
-      :TWITTER_CONSUMER_KEY,
-      :TWITTER_CONSUMER_SECRET
+      :facebook_app_id,
+      :facebook_app_secret,
+      :github_client_id,
+      :github_client_secret,
+      :google_client_id,
+      :google_client_secret,
+      :slack_client_id,
+      :slack_client_secret,
+      :twitter_consumer_key,
+      :twitter_consumer_secret
     ])
     |> validate_required([:email, :password])
     |> validate_format(:email, ~r/@/)
