@@ -55,7 +55,15 @@ config :phoenix_graphql, PhoenixGraphql.Repo,
   hostname: "localhost",
   pool_size: 10
 
-  # Use Scribe automatically
-    config :scribe,
-    compile_auto_inspect: true,
-    auto_inspect: true
+# Use Scribe automatically
+config :scribe,
+  compile_auto_inspect: true,
+  auto_inspect: true
+
+# Cloak
+config :phoenix_graphql, PhoenixGraphql.Vault,
+  ciphers: [
+    default:
+      {Cloak.Ciphers.AES.GCM,
+       tag: "AES.GCM.V1", key: Base.decode64!("BU0R3bd37gBiso/LmOdAKwhLoAp9rBFcaGAue2jJv2k=")}
+  ]

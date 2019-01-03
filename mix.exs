@@ -45,7 +45,8 @@ defmodule PhoenixGraphql.MixProject do
       {:argon2_elixir, "~> 1.3"},
       {:absinthe, "~> 1.4"},
       {:absinthe_plug, "~> 1.4"},
-      {:scribe, "~> 0.8.1"}
+      {:scribe, "~> 0.8.1"},
+      {:cloak_ecto, "~> 1.0.0-alpha.0"}
     ]
   end
 

@@ -11,9 +11,10 @@ defmodule PhoenixGraphql.Application do
       # Start the Ecto repository
       PhoenixGraphql.Repo,
       # Start the endpoint when the application starts
-      PhoenixGraphqlWeb.Endpoint
+      PhoenixGraphqlWeb.Endpoint,
       # Starts a worker by calling: PhoenixGraphql.Worker.start_link(arg)
       # {PhoenixGraphql.Worker, arg},
+      PhoenixGraphql.Vault
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

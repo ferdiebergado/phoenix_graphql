@@ -2,21 +2,22 @@ defmodule PhoenixGraphql.Accounts.Credential do
   use Ecto.Schema
   import Ecto.Changeset
   alias PhoenixGraphql.Accounts.User
+  alias PhoenixGraphql.Encrypted.Binary
 
   schema "credentials" do
-    field :email, :string
+    field :email, Binary
     field :password, :string, virtual: true
     field :password_hash, :string
-    field :facebook_app_id, :string
-    field :facebook_app_secret, :string
-    field :github_client_id, :string
-    field :github_client_secret, :string
-    field :google_client_id, :string
-    field :google_client_secret, :string
-    field :slack_client_id, :string
-    field :slack_client_secret, :string
-    field :twitter_consumer_key, :string
-    field :twitter_consumer_secret, :string
+    field :facebook_app_id, Binary
+    field :facebook_app_secret, Binary
+    field :github_client_id, Binary
+    field :github_client_secret, Binary
+    field :google_client_id, Binary
+    field :google_client_secret, Binary
+    field :slack_client_id, Binary
+    field :slack_client_secret, Binary
+    field :twitter_consumer_key, Binary
+    field :twitter_consumer_secret, Binary
     belongs_to(:user, User)
 
     timestamps()
