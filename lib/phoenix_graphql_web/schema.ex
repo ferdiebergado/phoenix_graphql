@@ -25,7 +25,7 @@ defmodule PhoenixGraphqlWeb.Schema do
       arg(:lastname, non_null(:string))
       arg(:username, non_null(:string))
       arg(:credentials, :accounts_input)
-      resolve(&Resolvers.UserResolver.create_user/3)
+      resolve(&Resolvers.UserResolver.create_user/2)
     end
   end
 end

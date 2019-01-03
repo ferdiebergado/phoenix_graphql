@@ -5,8 +5,13 @@ defmodule PhoenixGraphqlWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :graphql do
+    plug :accepts, ["json"]
+    plug PhoenixGraphqlWeb.Context
+  end
+
   scope "/api" do
-    pipe_through :api
+    pipe_through :graphql
 
     forward("/graphql", Absinthe.Plug, schema: PhoenixGraphqlWeb.Schema, json_codec: Jason)
 

@@ -12,7 +12,11 @@ defmodule PhoenixGraphqlWeb.Resolvers.UserResolver do
     end
   end
 
-  def create_user(_, attrs, _) do
+  def create_user(attrs, %{context: %{current_user: _current_user}}) do
     Accounts.create_user(attrs)
+  end
+
+  def create_user(_args, _info) do
+    {:error, "Not Authorized"}
   end
 end
