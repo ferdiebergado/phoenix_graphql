@@ -10,6 +10,7 @@ defmodule PhoenixGraphql.Accounts.User do
     field :is_active, :boolean, default: false
     field :role, :integer, default: 1
     field :last_login, :utc_datetime
+    field :token, :string, unique: true
     has_one(:credentials, Credential)
 
     timestamps()
@@ -21,5 +22,13 @@ defmodule PhoenixGraphql.Accounts.User do
     |> cast(attrs, [:firstname, :lastname, :username, :is_active, :last_login])
     |> validate_required([:firstname, :lastname, :username])
     |> unique_constraint(:username)
+  end
+
+  @doc false
+  def store_token_changeset(user, attrs) do
+    user
+    |> cast(attrs, [:token])
+    |> validate_required([:token])
+    |> unique_constraint(:token)
   end
 end

@@ -43,6 +43,12 @@ defmodule PhoenixGraphql.Accounts do
     |> Repo.preload(:credentials)
   end
 
+  def get_user_by_email(email) do
+    User
+    |> Repo.one(credentials: %{email: String.downcase(email)})
+    |> Repo.preload(:credentials)
+  end
+
   @doc """
   Creates a user.
 
@@ -202,5 +208,11 @@ defmodule PhoenixGraphql.Accounts do
   """
   def change_credential(%Credential{} = credential) do
     Credential.changeset(credential, %{})
+  end
+
+  def store_token(%User{} = user, token) do
+    user
+    |> User.store_token_changeset(%{token: token})
+    |> Repo.update()
   end
 end

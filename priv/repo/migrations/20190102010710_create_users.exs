@@ -9,6 +9,7 @@ defmodule PhoenixGraphql.Repo.Migrations.CreateUsers do
       add :role, :integer, null: false
       add :is_active, :boolean, null: false
       add :last_login, :utc_datetime
+      add :token, :text
 
       timestamps()
     end

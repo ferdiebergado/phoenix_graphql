@@ -25,6 +25,20 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
+# configures Guardian
+config :phoenix_graphql, PhoenixGraphql.Accounts.Guardian,
+  # optional
+  allowed_algos: ["HS512"],
+  # optional
+  verify_module: Guardian.JWT,
+  issuer: "Phoenix Graphql API by Ferdinand Saporas Bergado",
+  ttl: {30, :days},
+  allowed_drift: 2000,
+  # optional
+  verify_issuer: true,
+  secret_key: "UZQunYXRflx4Ezd4w243i/myLExghrl5CbQHlN7cDVYEQcanfR6iBu8ODXRI/Zq6",
+  serializer: PhoenixGraphql.Accounts.Guardian
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"

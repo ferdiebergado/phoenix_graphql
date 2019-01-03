@@ -16,6 +16,14 @@ defmodule PhoenixGraphqlWeb.Schema do
       arg(:id, non_null(:id))
       resolve(&Resolvers.UserResolver.find_user/3)
     end
+
+    @desc "Authenticate a user"
+    field :login, type: :token do
+      arg(:email, non_null(:string))
+      arg(:password, non_null(:string))
+
+      resolve(&PhoenixGraphqlWeb.Resolvers.CredentialResolver.login/2)
+    end
   end
 
   mutation do

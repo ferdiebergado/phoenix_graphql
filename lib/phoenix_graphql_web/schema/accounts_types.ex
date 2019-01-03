@@ -10,6 +10,7 @@ defmodule PhoenixGraphqlWeb.Schema.AccountsTypes do
     field :role, :integer
     field :is_active, :boolean
     field :last_login, :naive_datetime
+    field :token, :string
     field :credentials, list_of(:credentials)
   end
 
@@ -36,5 +37,9 @@ defmodule PhoenixGraphqlWeb.Schema.AccountsTypes do
     field :slack_client_secret, :string
     field :twitter_consumer_key, :string
     field :twitter_consumer_secret, :string
+  end
+
+  object :token do
+    field :token, :string
   end
 end
