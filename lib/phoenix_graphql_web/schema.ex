@@ -14,7 +14,7 @@ defmodule PhoenixGraphqlWeb.Schema do
     @desc "Find a user by ID"
     field :user, :user do
       arg(:id, non_null(:id))
-      resolve(&UserResolver.find_user/1)
+      resolve(&UserResolver.find_user/3)
     end
 
     @desc "Authenticate a user"
@@ -33,7 +33,7 @@ defmodule PhoenixGraphqlWeb.Schema do
       arg(:lastname, non_null(:string))
       arg(:username, non_null(:string))
       arg(:credentials, :accounts_input)
-      resolve(&UserResolver.create_user/2)
+      resolve(&UserResolver.create_user/3)
     end
 
     @desc "Update a user"
@@ -41,7 +41,7 @@ defmodule PhoenixGraphqlWeb.Schema do
       arg(:id, non_null(:id))
       arg(:user, :update_user_input)
 
-      resolve(&UserResolver.update_user/2)
+      resolve(&UserResolver.update_user/3)
     end
   end
 end

@@ -81,11 +81,31 @@ defmodule PhoenixGraphql.Accounts do
 
   """
   def update_user(%User{} = user, attrs) do
+    cred = get_credential_by_user_id(user.id)
+    updates = Map.merge(attrs, %{credentials: %{id: cred.id}})
+
     user
-    |> User.changeset(attrs)
-    |> Ecto.Changeset.cast_assoc(:credentials, with: &Credential.changeset/2)
+    |> Repo.preload(:credentials)
+    |> User.changeset(updates)
+    |> Ecto.Changeset.cast_assoc(:credentials, with: &Credential.update_changeset/2)
     |> Repo.update()
   end
+
+  # require IEx
+
+  # def update_user(%User{} = user, attrs) do
+  #   cred = get_credential_by_user_id(user.id)
+  #   updates = Map.merge(attrs, %{credentials: %{id: cred.id}})
+  #   IEx.pry()
+
+  #   User
+  #   |> Repo.get(user.id)
+  #   |> Repo.preload(:credentials)
+  #   |> Ecto.Changeset.cast(updates, [])
+  #   # |> Ecto.Changeset.change(%{credentials: %{id: cred.id}})
+  #   |> Ecto.Changeset.cast_assoc(:credentials, with: &Credential.changeset/2)
+  #   |> Repo.update()
+  # end
 
   @doc """
   Deletes a User.
@@ -144,6 +164,11 @@ defmodule PhoenixGraphql.Accounts do
 
   """
   def get_credential!(id), do: Repo.get!(Credential, id)
+
+  def get_credential_by_user_id(user_id) do
+    Credential
+    |> Repo.get_by(user_id: user_id)
+  end
 
   @doc """
   Creates a credential.
