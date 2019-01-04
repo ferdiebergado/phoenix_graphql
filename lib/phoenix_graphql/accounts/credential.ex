@@ -3,9 +3,11 @@ defmodule PhoenixGraphql.Accounts.Credential do
   import Ecto.Changeset
   alias PhoenixGraphql.Accounts.User
   alias PhoenixGraphql.Encrypted.Binary
+  alias PhoenixGraphql.Hashed.HMAC
 
   schema "credentials" do
     field :email, Binary
+    field :email_hash, HMAC
     field :password, :string, virtual: true
     field :password_hash, :string
     field :facebook_app_id, Binary
@@ -47,6 +49,7 @@ defmodule PhoenixGraphql.Accounts.Credential do
     |> validate_length(:password, min: 8, max: 100)
     |> unique_constraint(:email, downcase: true)
     |> put_pass_hash()
+    |> put_hashed_fields()
   end
 
   defp put_pass_hash(%Ecto.Changeset{valid?: true, changes: %{password: password}} = changeset) do
@@ -54,4 +57,9 @@ defmodule PhoenixGraphql.Accounts.Credential do
   end
 
   defp put_pass_hash(changeset), do: changeset
+
+  defp put_hashed_fields(changeset) do
+    changeset
+    |> put_change(:email_hash, get_field(changeset, :email))
+  end
 end

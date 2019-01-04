@@ -24,6 +24,11 @@ defmodule PhoenixGraphqlWeb.Schema.AccountsTypes do
     field :twitter_consumer_key, :string
   end
 
+  object :token do
+    field :token, :string
+    field :user, :user
+  end
+
   input_object :accounts_input do
     field :email, non_null(:string)
     field :password, non_null(:string)
@@ -39,7 +44,9 @@ defmodule PhoenixGraphqlWeb.Schema.AccountsTypes do
     field :twitter_consumer_secret, :string
   end
 
-  object :token do
-    field :token, :string
+  input_object :update_user_input do
+    field :firstname, :string
+    field :lastname, :string
+    field :username, :string
   end
 end

@@ -1,28 +1,28 @@
 defmodule PhoenixGraphqlWeb.Schema do
   use Absinthe.Schema
-
   import_types(PhoenixGraphqlWeb.Schema.Types)
 
-  alias PhoenixGraphqlWeb.Resolvers
+  alias PhoenixGraphqlWeb.Resolvers.UserResolver
+  alias PhoenixGraphqlWeb.Resolvers.CredentialResolver
 
   query do
     @desc "List all users"
     field :users, list_of(:user) do
-      resolve(&Resolvers.UserResolver.list_users/3)
+      resolve(&UserResolver.list_users/3)
     end
 
     @desc "Find a user by ID"
     field :user, :user do
       arg(:id, non_null(:id))
-      resolve(&Resolvers.UserResolver.find_user/3)
+      resolve(&UserResolver.find_user/1)
     end
 
     @desc "Authenticate a user"
-    field :login, type: :token do
+    field :login, :token do
       arg(:email, non_null(:string))
       arg(:password, non_null(:string))
 
-      resolve(&PhoenixGraphqlWeb.Resolvers.CredentialResolver.login/2)
+      resolve(&CredentialResolver.login/2)
     end
   end
 
@@ -33,7 +33,15 @@ defmodule PhoenixGraphqlWeb.Schema do
       arg(:lastname, non_null(:string))
       arg(:username, non_null(:string))
       arg(:credentials, :accounts_input)
-      resolve(&Resolvers.UserResolver.create_user/2)
+      resolve(&UserResolver.create_user/2)
+    end
+
+    @desc "Update a user"
+    field :update_user, :user do
+      arg(:id, non_null(:id))
+      arg(:user, :update_user_input)
+
+      resolve(&UserResolver.update_user/2)
     end
   end
 end

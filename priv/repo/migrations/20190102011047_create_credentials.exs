@@ -4,6 +4,7 @@ defmodule PhoenixGraphql.Repo.Migrations.CreateCredentials do
   def change do
     create table(:credentials) do
       add :email, :binary, null: false
+      add :email_hash, :binary, null: false
       add :password_hash, :string, null: false
       add :facebook_app_id, :binary
       add :facebook_app_secret, :binary

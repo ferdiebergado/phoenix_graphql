@@ -39,6 +39,10 @@ config :phoenix_graphql, PhoenixGraphql.Accounts.Guardian,
   secret_key: "UZQunYXRflx4Ezd4w243i/myLExghrl5CbQHlN7cDVYEQcanfR6iBu8ODXRI/Zq6",
   serializer: PhoenixGraphql.Accounts.Guardian
 
+config :phoenix_graphql, PhoenixGraphql.Hashed.HMAC,
+  algorithm: :sha512,
+  secret: "dbpKUNRHBNeEFfcMJAbiZMGEE7Pihf8be+cGC5E7ecg4NgbZ+UT2ZA6GRQdgeFm8"
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"

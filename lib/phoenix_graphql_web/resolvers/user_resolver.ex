@@ -5,7 +5,7 @@ defmodule PhoenixGraphqlWeb.Resolvers.UserResolver do
     {:ok, Accounts.list_users()}
   end
 
-  def find_user(_, %{id: id}, _) do
+  def find_user(id) do
     case Accounts.get_user(id) do
       nil -> {:error, "User #{id} does not exist."}
       user -> {:ok, user}
@@ -18,5 +18,12 @@ defmodule PhoenixGraphqlWeb.Resolvers.UserResolver do
 
   def create_user(_args, _info) do
     {:error, "Not Authorized"}
+  end
+
+  def update_user(%{id: id, user: user_params}, _info) do
+    case find_user(id) do
+      {:ok, user} -> user |> Accounts.update_user(user_params)
+      {:error, error} -> error
+    end
   end
 end

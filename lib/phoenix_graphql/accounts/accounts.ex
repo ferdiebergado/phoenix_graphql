@@ -45,7 +45,7 @@ defmodule PhoenixGraphql.Accounts do
 
   def get_user_by_email(email) do
     User
-    |> Repo.one(credentials: %{email: String.downcase(email)})
+    |> Repo.one(credentials: %{email_hash: String.downcase(email)})
     |> Repo.preload(:credentials)
   end
 
