@@ -56,9 +56,9 @@ config :phoenix_graphql, PhoenixGraphql.Repo,
   pool_size: 10
 
 # Use Scribe automatically
-config :scribe,
-  compile_auto_inspect: true,
-  auto_inspect: true
+# config :scribe,
+#   compile_auto_inspect: true,
+#   auto_inspect: true
 
 # Cloak
 config :phoenix_graphql, PhoenixGraphql.Vault,
