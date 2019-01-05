@@ -21,11 +21,6 @@ defmodule PhoenixGraphqlWeb.Resolvers.UserResolver do
   end
 
   def update_user(_, %{id: id, user: user_params}, _) do
-    # updates = %{user_params, %{credentials | user_id: id}}
-    # cred_id = Accounts.get_credential_by_user_id(id)
-
-    # updates = %{user_params.credentials | id: cred_id}
-
     case Accounts.get_user(id) do
       nil -> {:error, "User #{id} not found."}
       user -> user |> Accounts.update_user(user_params)

@@ -43,5 +43,13 @@ defmodule PhoenixGraphqlWeb.Schema do
 
       resolve(&UserResolver.update_user/3)
     end
+
+    @desc "Update a credential"
+    field :update_credential, :credentials do
+      arg(:id, non_null(:id))
+      arg(:credentials, :update_credentials_input)
+
+      resolve(&CredentialResolver.update_credential/3)
+    end
   end
 end

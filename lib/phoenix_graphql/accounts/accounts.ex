@@ -4,6 +4,7 @@ defmodule PhoenixGraphql.Accounts do
   """
 
   import Ecto.Query, warn: false
+  import PhoenixGraphql.Utilities.EctoHelper, only: [get_errors: 1]
   alias PhoenixGraphql.Repo
 
   alias PhoenixGraphql.Accounts.{User, Credential}
@@ -80,19 +81,9 @@ defmodule PhoenixGraphql.Accounts do
       {:error, %Ecto.Changeset{}}
 
   """
-  # require IEx
-
   def update_user(%User{} = user, attrs) do
-    cred = get_credential_by_user_id(user.id)
-    creds_update = Map.put(attrs.credentials, :id, cred.id)
-    updates = Map.put(attrs, :credentials, creds_update)
-
     user
-    |> Repo.preload(:credentials)
-    |> User.changeset(updates)
-
-    # IEx.pry()
-    |> Ecto.Changeset.cast_assoc(:credentials, with: &Credential.changeset/2)
+    |> User.changeset(attrs)
     |> Repo.update()
   end
 
@@ -169,7 +160,7 @@ defmodule PhoenixGraphql.Accounts do
       ** (Ecto.NoResultsError)
 
   """
-  def get_credential!(id), do: Repo.get!(Credential, id)
+  def get_credential(id), do: Repo.get(Credential, id)
 
   def get_credential_by_user_id(user_id) do
     Credential
@@ -208,8 +199,12 @@ defmodule PhoenixGraphql.Accounts do
   """
   def update_credential(%Credential{} = credential, attrs) do
     credential
-    |> Credential.changeset(attrs)
+    |> Credential.update_changeset(attrs)
     |> Repo.update()
+    |> case do
+      {:ok, credential} -> {:ok, credential}
+      {:error, changeset} -> {:error, %{message: get_errors(changeset)}}
+    end
   end
 
   @doc """

@@ -22,14 +22,14 @@ defmodule PhoenixGraphql.Accounts.Credential do
     facebook_app_id
     facebook_app_secret
     github_client_id
-        github_client_secret
-        google_client_id
-        google_client_secret
-        slack_client_id
-        slack_client_secret
-        twitter_consumer_key
-        twitter_consumer_secret
-        )a
+    github_client_secret
+    google_client_id
+    google_client_secret
+    slack_client_id
+    slack_client_secret
+    twitter_consumer_key
+    twitter_consumer_secret
+    )a
 
   schema "credentials" do
     field :email, Binary
@@ -56,6 +56,17 @@ defmodule PhoenixGraphql.Accounts.Credential do
     credential
     |> cast(attrs, @required_fields ++ @optional_fields)
     |> validate_required(@required_fields)
+    |> validate_format(:email, ~r/@/)
+    |> validate_length(:password, min: 8, max: 100)
+    |> unique_constraint(:email, downcase: true)
+    |> put_pass_hash
+    |> put_hashed_fields
+  end
+
+  @doc false
+  def update_changeset(credential, attrs) do
+    credential
+    |> cast(attrs, @required_fields ++ @optional_fields)
     |> validate_format(:email, ~r/@/)
     |> validate_length(:password, min: 8, max: 100)
     |> unique_constraint(:email, downcase: true)
