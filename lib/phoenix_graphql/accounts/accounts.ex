@@ -80,29 +80,35 @@ defmodule PhoenixGraphql.Accounts do
       {:error, %Ecto.Changeset{}}
 
   """
+  # require IEx
+
   def update_user(%User{} = user, attrs) do
     cred = get_credential_by_user_id(user.id)
-    updates = Map.merge(attrs, %{credentials: %{id: cred.id}})
+    creds_update = Map.put(attrs.credentials, :id, cred.id)
+    updates = Map.put(attrs, :credentials, creds_update)
 
     user
     |> Repo.preload(:credentials)
     |> User.changeset(updates)
-    |> Ecto.Changeset.cast_assoc(:credentials, with: &Credential.update_changeset/2)
+
+    # IEx.pry()
+    |> Ecto.Changeset.cast_assoc(:credentials, with: &Credential.changeset/2)
     |> Repo.update()
   end
 
-  # require IEx
+  # # require IEx
 
   # def update_user(%User{} = user, attrs) do
   #   cred = get_credential_by_user_id(user.id)
-  #   updates = Map.merge(attrs, %{credentials: %{id: cred.id}})
-  #   IEx.pry()
+  #   creds_update = Map.put(attrs.credentials, :id, cred.id)
+  #   updates = Map.put(attrs, :credentials, creds_update)
 
   #   User
   #   |> Repo.get(user.id)
   #   |> Repo.preload(:credentials)
   #   |> Ecto.Changeset.cast(updates, [])
-  #   # |> Ecto.Changeset.change(%{credentials: %{id: cred.id}})
+
+  #   # IEx.pry()
   #   |> Ecto.Changeset.cast_assoc(:credentials, with: &Credential.changeset/2)
   #   |> Repo.update()
   # end

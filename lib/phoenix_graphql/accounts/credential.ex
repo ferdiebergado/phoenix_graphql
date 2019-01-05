@@ -8,14 +8,20 @@ defmodule PhoenixGraphql.Accounts.Credential do
   alias PhoenixGraphql.Encrypted.Binary
   alias PhoenixGraphql.Hashed.HMAC
 
-  @required_fields ~w(email password)a
+  @timestamps_opts [type: :utc_datetime]
+
+  @required_fields ~w(
+    email
+    password
+    )a
 
   @optional_fields ~w(
-        password_hash
-        user_id
-        facebook_app_id
-        facebook_app_secret
-        github_client_id
+    id
+    password_hash
+    user_id
+    facebook_app_id
+    facebook_app_secret
+    github_client_id
         github_client_secret
         google_client_id
         google_client_secret
@@ -66,15 +72,5 @@ defmodule PhoenixGraphql.Accounts.Credential do
   defp put_hashed_fields(changeset) do
     changeset
     |> put_change(:email_hash, get_field(changeset, :email))
-  end
-
-  def update_changeset(credentials, attrs) do
-    credentials
-    |> cast(attrs, @required_fields ++ @optional_fields)
-    |> validate_format(:email, ~r/@/)
-    |> validate_length(:password, min: 8, max: 100)
-    |> unique_constraint(:email, downcase: true)
-    |> put_pass_hash
-    |> put_hashed_fields
   end
 end
