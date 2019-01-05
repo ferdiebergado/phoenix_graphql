@@ -6,4 +6,11 @@ defmodule PhoenixGraphql.Utilities.EctoHelper do
       end)
     end)
   end
+
+  def output_graphql_format(changeset) do
+    case changeset do
+      {:ok, domain} -> {:ok, domain}
+      {:error, changeset} -> {:error, %{message: get_errors(changeset)}}
+    end
+  end
 end

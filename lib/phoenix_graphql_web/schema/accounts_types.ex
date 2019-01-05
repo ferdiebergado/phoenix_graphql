@@ -49,6 +49,7 @@ defmodule PhoenixGraphqlWeb.Schema.AccountsTypes do
     field :firstname, :string
     field :lastname, :string
     field :username, :string
+    field :credentials, :update_credentials_input
   end
 
   input_object :update_credentials_input do

@@ -7,7 +7,7 @@ defmodule PhoenixGraphqlWeb.Resolvers.UserResolver do
 
   def find_user(_, %{id: id}, _) do
     case Accounts.get_user(id) do
-      nil -> {:error, "User #{id} does not exist."}
+      nil -> {:error, "User with ID #{id} does not exist."}
       user -> {:ok, user}
     end
   end
@@ -22,7 +22,7 @@ defmodule PhoenixGraphqlWeb.Resolvers.UserResolver do
 
   def update_user(_, %{id: id, user: user_params}, _) do
     case Accounts.get_user(id) do
-      nil -> {:error, "User #{id} not found."}
+      nil -> {:error, "User with ID #{id} not found."}
       user -> user |> Accounts.update_user(user_params)
     end
   end

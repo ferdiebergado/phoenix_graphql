@@ -13,16 +13,11 @@ defmodule PhoenixGraphqlWeb.Resolvers.CredentialResolver do
   def update_credential(_, %{id: id, credentials: params}, _) do
     case Accounts.get_credential(id) do
       nil ->
-        {:error, "Credential #{id} not found."}
+        {:error, "Credential with ID #{id} not found."}
 
       credential ->
         credential
         |> Accounts.update_credential(params)
-
-        # |> case do
-        #   {:ok, credential} -> {:ok, credential}
-        #   {:error, errors} -> {:error, errors}
-        # end
     end
   end
 end
