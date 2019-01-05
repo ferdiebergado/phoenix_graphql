@@ -45,8 +45,12 @@ defmodule PhoenixGraphql.Accounts do
   end
 
   def get_user_by_email(email) do
+    c = Credential |> Repo.get_by!(email_hash: email)
+
     User
-    |> Repo.one(credentials: %{email_hash: String.downcase(email)})
+    # |> Repo.get_by(email_hash: email)
+    # |> Repo.one(credentials: %{email_hash: String.downcase(email)})
+    |> Repo.get(c.user_id)
     |> Repo.preload(:credentials)
   end
 
@@ -241,6 +245,12 @@ defmodule PhoenixGraphql.Accounts do
   end
 
   def store_token(%User{} = user, token) do
+    user
+    |> User.store_token_changeset(%{token: token})
+    |> Repo.update()
+  end
+
+  def revoke_token(%User{} = user, token) do
     user
     |> User.store_token_changeset(%{token: token})
     |> Repo.update()

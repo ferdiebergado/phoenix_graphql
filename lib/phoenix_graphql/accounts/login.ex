@@ -6,7 +6,6 @@ defmodule PhoenixGraphql.Accounts.Login do
   alias PhoenixGraphql.Accounts
 
   def login_with_email_pass(email, given_pass) do
-    # user = Repo.get_by(User, credentials: %{email: String.downcase(email)})
     user = Accounts.get_user_by_email(email)
 
     cond do

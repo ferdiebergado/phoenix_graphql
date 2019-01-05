@@ -22,7 +22,7 @@ defmodule PhoenixGraphqlWeb.Schema do
       arg(:email, non_null(:string))
       arg(:password, non_null(:string))
 
-      resolve(&CredentialResolver.login/2)
+      resolve(&CredentialResolver.login/3)
     end
   end
 
@@ -57,6 +57,12 @@ defmodule PhoenixGraphqlWeb.Schema do
       arg(:credentials, :update_credentials_input)
 
       resolve(&CredentialResolver.update_credential/3)
+    end
+
+    @desc "Logout user"
+    field :logout, :user do
+      # arg(:id, non_null(:id))
+      resolve(&UserResolver.logout_user/3)
     end
   end
 end

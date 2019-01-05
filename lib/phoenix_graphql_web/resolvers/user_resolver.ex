@@ -33,4 +33,13 @@ defmodule PhoenixGraphqlWeb.Resolvers.UserResolver do
       user -> user |> Accounts.delete_user()
     end
   end
+
+  def logout_user(_, _, %{context: %{current_user: current_user, token: _token}}) do
+    Accounts.revoke_token(current_user, nil)
+    {:ok, current_user}
+  end
+
+  def logout_user(_, _, _info) do
+    {:error, "Please log in first!"}
+  end
 end
