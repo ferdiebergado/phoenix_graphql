@@ -26,4 +26,11 @@ defmodule PhoenixGraphqlWeb.Resolvers.UserResolver do
       user -> user |> Accounts.update_user(user_params)
     end
   end
+
+  def delete_user(_, %{id: id}, _) do
+    case Accounts.get_user(id) do
+      nil -> {:error, "User with ID #{id} not found."}
+      user -> user |> Accounts.delete_user()
+    end
+  end
 end

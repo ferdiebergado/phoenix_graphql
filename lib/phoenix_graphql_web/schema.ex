@@ -44,6 +44,13 @@ defmodule PhoenixGraphqlWeb.Schema do
       resolve(&UserResolver.update_user/3)
     end
 
+    @desc "Delete a user"
+    field :delete_user, :user do
+      arg(:id, non_null(:id))
+
+      resolve(&UserResolver.delete_user/3)
+    end
+
     @desc "Update a credential"
     field :update_credential, :credentials do
       arg(:id, non_null(:id))
