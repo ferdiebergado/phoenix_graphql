@@ -33,4 +33,10 @@ defmodule PhoenixGraphql.Accounts.User do
     |> validate_required([:token])
     |> unique_constraint(:token)
   end
+
+  @doc false
+  def revoke_token_changeset(user, attrs) do
+    user
+    |> cast(attrs, [:token])
+  end
 end

@@ -252,7 +252,7 @@ defmodule PhoenixGraphql.Accounts do
 
   def revoke_token(%User{} = user, token) do
     user
-    |> User.store_token_changeset(%{token: token})
+    |> User.revoke_token_changeset(%{token: token})
     |> Repo.update()
   end
 end
