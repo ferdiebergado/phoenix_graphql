@@ -3,6 +3,8 @@ defmodule PhoenixGraphql.Accounts.User do
   import Ecto.Changeset
   alias PhoenixGraphql.Accounts.Credential
 
+  @timestamps_opts [type: :utc_datetime]
+
   schema "users" do
     field :firstname, :string
     field :lastname, :string
