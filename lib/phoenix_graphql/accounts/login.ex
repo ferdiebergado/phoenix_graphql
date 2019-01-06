@@ -1,8 +1,7 @@
 defmodule PhoenixGraphql.Accounts.Login do
   @moduledoc false
 
-  import Comeonin.Argon2, only: [checkpw: 2]
-  # alias PhoenixGraphql.Repo
+  import Comeonin.Bcrypt, only: [checkpw: 2]
   alias PhoenixGraphql.Accounts
 
   def login_with_email_pass(email, given_pass) do

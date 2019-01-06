@@ -7,6 +7,7 @@ defmodule PhoenixGraphql.Accounts.Credential do
   alias PhoenixGraphql.Accounts.User
   alias PhoenixGraphql.Encrypted.Binary
   alias PhoenixGraphql.Hashed.HMAC
+  import Comeonin.Bcrypt, only: [add_hash: 1]
 
   @timestamps_opts [type: :utc_datetime]
 
@@ -75,7 +76,7 @@ defmodule PhoenixGraphql.Accounts.Credential do
   end
 
   defp put_pass_hash(%Ecto.Changeset{valid?: true, changes: %{password: password}} = changeset) do
-    change(changeset, Comeonin.Argon2.add_hash(password))
+    change(changeset, add_hash(password))
   end
 
   defp put_pass_hash(changeset), do: changeset

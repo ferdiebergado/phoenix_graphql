@@ -18,4 +18,5 @@ config :phoenix_graphql, PhoenixGraphql.Repo,
   pool: Ecto.Adapters.SQL.Sandbox
 
 # Password Hashing
-config :argon2_elixir, t_cost: 2, m_cost: 8
+# config :argon2_elixir, t_cost: 2, m_cost: 8
+config :bcrypt_elixir, log_rounds: 4
