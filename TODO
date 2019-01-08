@@ -1,0 +1,7 @@
+- recompiler
+- Caching w/ Nebulex
+- Rate limiting w/ hammer-plug 
+- CORS w/ Cors-plug
+- email using swoosh 
+- UUID for user ids
+- DB Encryption w/ cloak-ecto
